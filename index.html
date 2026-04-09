@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Eduardo Araújo</title>
-    <!-- Ícones -->
+    <!-- Ícones Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Seu CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root"></div>
 
-    <!-- Bibliotecas React e Babel -->
+    <!-- Bibliotecas React -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -24,7 +23,7 @@
           const [secao, setSecao] = useState('perfil');
           const [dark, setDark] = useState(false);
           const [depoimentos, setDepoimentos] = useState([
-            { nome: "Equipe Técnica", texto: "O Eduardo é um excelente profissional!" }
+            { nome: "Equipe Técnica", texto: "O Eduardo é um profissional extremamente dedicado!" }
           ]);
           const [novoNome, setNovoNome] = useState("");
           const [novoTexto, setNovoTexto] = useState("");
@@ -36,20 +35,20 @@
             whatsapp: "5592992140488", 
             email: "engeduardofilipe@gmail.com",
             skills: [
-              { nome: "Engenharia", icone: "fas fa-bolt", cor: "#f7df1e" },
-              { nome: "Processos", icone: "fas fa-industry", cor: "#1572b6" },
-              { nome: "Segurança", icone: "fas fa-hard-hat", cor: "#e34f26" },
-              { nome: "Gestão", icone: "fas fa-tasks", cor: "#61dafb" }
+              { nome: "Engenharia", icone: "fas fa-bolt", cor: "#f1c40f" },
+              { nome: "Processos", icone: "fas fa-industry", cor: "#2980b9" },
+              { nome: "Segurança", icone: "fas fa-hard-hat", cor: "#e67e22" },
+              { nome: "Gestão", icone: "fas fa-tasks", cor: "#3498db" }
             ],
             projetos: [
-              { nome: "Otimização Industrial", desc: "Melhoria de processos e redução de desperdícios.", link: "#" },
-              { nome: "Gestão de CIPA", desc: "Implementação de normas de segurança e treinamentos.", link: "#" },
-              { nome: "Automação Técnica", desc: "Configuração de sistemas e manutenção elétrica.", link: "#" }
+              { nome: "Otimização Industrial", desc: "Melhoria de processos produtivos e redução de desperdícios." },
+              { nome: "Gestão de CIPA", desc: "Implementação de normas de segurança e treinamentos NR." },
+              { nome: "Automação Técnica", desc: "Manutenção e configuração de sistemas elétricos." }
             ],
             formacao: [
-              { nome: "Graduação: Engenharia Elétrica", local: "Bacharelado Completo", status: "Concluído" },
-              { nome: "Especialização: Cronoanálise", local: "Análise de Processos", status: "Concluído" },
-              { nome: "NR-10 / NR-35", local: "Segurança do Trabalho", status: "Certificado" }
+              { nome: "Engenharia Elétrica", local: "Bacharelado Completo", status: "Concluído" },
+              { nome: "Pós: Cronoanálise", local: "Análise de Processos Industriais", status: "Concluído" },
+              { nome: "Certificação: NR-10", local: "Segurança em Eletricidade", status: "Certificado" }
             ]
           };
 
@@ -66,18 +65,8 @@
             }
           };
 
-          const abrirEmail = () => {
-            window.location.href = `mailto:${dados.email}`;
-          };
-
           const BotaoVoltar = () => (
-            <button 
-              onClick={() => setSecao('perfil')}
-              style={{
-                background: 'none', border: 'none', color: 'var(--primary-red)',
-                cursor: 'pointer', fontSize: '0.9em', fontWeight: 'bold',
-                marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', padding: '5px 0'
-              }}>
+            <button onClick={() => setSecao('perfil')} className="back-btn">
               <i className="fas fa-arrow-left"></i> Voltar ao Início
             </button>
           );
@@ -103,14 +92,9 @@
                 {secao === 'perfil' && (
                   <div>
                     <h2>Resumo Profissional</h2>
-                    <p style={{textAlign: 'justify', lineHeight: '1.6'}}>
-                      Engenheiro Eletricista focado na otimização de processos industriais e engenharia de manufatura. Experiência sólida em gestão de segurança (CIPA), treinamentos de NR e aumento de produtividade operacional.
-                    </p>
-                    <button onClick={abrirEmail} className="email-btn-custom">
-                      <i className="fas fa-envelope"></i> Entrar em Contato por E-mail
-                    </button>
-
-                    <div style={{display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '30px', flexWrap: 'wrap'}}>
+                    <p style={{textAlign: 'justify'}}>Engenheiro Eletricista focado na otimização de processos industriais e engenharia de manufatura.</p>
+                    <p><strong>Contato:</strong> {dados.email}</p>
+                    <div style={{display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '20px', flexWrap: 'wrap'}}>
                       {dados.skills.map((s, i) => (
                         <div key={i} style={{textAlign: 'center', width: '80px'}}>
                           <i className={s.icone} style={{fontSize: '2.5em', color: s.cor, display: 'block'}}></i>
@@ -124,14 +108,12 @@
                 {secao === 'projetos' && (
                   <div>
                     <h2>Projetos e Realizações</h2>
-                    <div className="grid-projetos">
-                      {dados.projetos.map((p, i) => (
-                        <div key={i} className="item-card" style={{borderTop: '4px solid var(--primary-red)', borderLeft: 'none'}}>
-                          <h3>{p.nome}</h3>
-                          <p>{p.desc}</p>
-                        </div>
-                      ))}
-                    </div>
+                    {dados.projetos.map((p, i) => (
+                      <div key={i} className="item-card">
+                        <h3>{p.nome}</h3>
+                        <p>{p.desc}</p>
+                      </div>
+                    ))}
                     <BotaoVoltar />
                   </div>
                 )}
@@ -141,11 +123,11 @@
                     <h2>Certificações e Formação</h2>
                     {dados.formacao.map((f, i) => (
                       <div key={i} className="item-card">
-                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
                           <strong>{f.nome}</strong>
                           <span className="status-tag">{f.status}</span>
                         </div>
-                        <p className="local-text">{f.local}</p>
+                        <p>{f.local}</p>
                       </div>
                     ))}
                     <BotaoVoltar />
@@ -156,13 +138,13 @@
                   <div>
                     <h2>Mural de Recados</h2>
                     <form onSubmit={enviarRecado} className="mural-form">
-                      <input placeholder="Seu nome" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
-                      <textarea placeholder="Sua mensagem" value={novoTexto} onChange={(e) => setNovoTexto(e.target.value)} rows="3" />
+                      <input placeholder="Seu nome" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} required />
+                      <textarea placeholder="Sua mensagem" value={novoTexto} onChange={(e) => setNovoTexto(e.target.value)} rows="3" required />
                       <button type="submit" className="btn-post">Publicar Recado</button>
                     </form>
                     {depoimentos.map((d, i) => (
                       <div key={i} className="item-card">
-                        <p>{d.texto}</p>
+                        <p>"{d.texto}"</p>
                         <small>— <strong>{d.nome}</strong></small>
                       </div>
                     ))}
@@ -170,10 +152,6 @@
                   </div>
                 )}
               </main>
-
-              <div className="footer-info">
-                 Manaus, AM | {dados.email}
-              </div>
 
               <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank">
                 <i className="fab fa-whatsapp"></i>
