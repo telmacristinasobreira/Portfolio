@@ -1,36 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio Eduardo Filipe</title>
+    <title>Portfólio Eduardo Araújo</title>
     
-    <!-- Bibliotecas de Suporte (Não remova) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* O SEU DESIGN ORIGINAL DO CODEPEN */
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
-        header { background-color: #b71c1c; color: white; padding: 50px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        /* 2. CSS COMPLETO E IDENTICO AO CODEPEN */
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; }
+        header { background-color: #b71c1c; color: white; padding: 50px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); position: relative; }
         header h1 { margin: 10px 0; font-size: 2.2em; }
-        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto 15px; object-fit: cover; }
+        header p { font-style: italic; opacity: 0.9; margin: 5px 0 0; }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto 15px; object-fit: cover; }
         nav { margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.85em; transition: 0.3s; }
+        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.85em; transition: all 0.3s; }
+        .nav-link:hover { background: rgba(255, 255, 255, 0.3); }
         .nav-link.active { background: white; color: #b71c1c; border-color: white; }
-        .card { background: white; max-width: 750px; margin: -40px auto 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .card { background: white; max-width: 750px; margin: -40px auto 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; position: relative; z-index: 10; }
         .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 20px; margin-bottom: 15px; border-radius: 8px; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
-        .whatsapp-btn:hover { transform: scale(1.1); }
         .info-box { background: #eef2f7; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+        .whatsapp-btn:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
+
     <div id="root"></div>
 
     <script type="text/babel">
+        // Definição do useState para o método UMD (evita erros de import)
         const { useState } = React;
 
         const App = () => {
@@ -43,13 +46,92 @@
                 email: "engeduardofilipe@gmail.com",
                 whatsapp: "5592992140488",
                 projetos: [
-                    { t: "Otimização de Processos de Manufatura", d: "Estratégias técnicas para produtividade e redução de custos." },
-                    { t: "Gestão de Segurança e CIPA", d: "Avaliações de riscos e melhorias operacionais (DSS)." },
-                    { t: "Automação e Manutenção Técnica", d: "Configuração de sistemas automatizados de alta complexidade." }
+                    { titulo: "Otimização de Processos de Manufatura", desc: "Desenvolvimento e implementação de estratégias técnicas para ganho de produtividade, redução de custos e melhoria da ergonomia na linha de produção." },
+                    { titulo: "Gestão de Segurança e CIPA", desc: "Condução de avaliações de riscos e implementação de melhorias operacionais através de Diálogos Semanais de Segurança (DSS)." },
+                    { titulo: "Automação e Manutenção Técnica", desc: "Seis anos de experiência em manutenção preventiva/corretiva e configuração de sistemas automatizados de alta complexidade." }
+                ],
+                certificados: [
+                    { nome: "Cronometragem e Cronoanálise: Nível Especialista", cat: "Engenharia de Processos" },
+                    { nome: "NR 10 - Segurança em Eletricidade", cat: "Segurança" },
+                    { nome: "Inglês Avançado", cat: "Idiomas" }
                 ]
             };
 
             return (
                 <div>
                     <header>
-                        <img src={dados.foto}
+                        <img src={dados.foto} alt="Eduardo Araújo" className="profile-photo" />
+                        <h1>{dados.nome}</h1>
+                        <p>{dados.cargo}</p>
+                        <nav>
+                            <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}><i className="fas fa-user"></i> SOBRE</button>
+                            <button className={`nav-link ${secao === 'projetos' ? 'active' : ''}`} onClick={() => setSecao('projetos')}><i className="fas fa-tasks"></i> PROJETOS</button>
+                            <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}><i className="fas fa-graduation-cap"></i> CERTIFICAÇÕES</button>
+                            <button className={`nav-link ${secao === 'mural' ? 'active' : ''}`} onClick={() => setSecao('mural')}><i className="fas fa-comments"></i> MURAL</button>
+                        </nav>
+                    </header>
+
+                    <main style={{padding: '0 20px'}}>
+                        <div className="card">
+                            {secao === 'perfil' && (
+                                <div>
+                                    <h2><i className="fas fa-star" style={{color: '#ffd700'}}></i> Bem-vindo ao meu Portfólio!</h2>
+                                    <p><strong>Engenheiro Eletricista</strong> apaixonado por processos industriais e otimização. Atualmente, transformo dados e rotinas operacionais em resultados de alta performance na Engenharia Industrial.</p>
+                                    <div className="info-box">
+                                        <h3 style={{fontSize: '1em', marginTop: '0'}}>🛠 O que eu trago para a mesa:</h3>
+                                        <ul style={{listStyle: 'none', padding: '0', fontSize: '0.95em', lineHeight: '1.6'}}>
+                                            <li><i className="fas fa-check-circle" style={{color: '#2980b9'}}></i> Expertise em Engenharia Elétrica aplicada à manufatura.</li>
+                                            <li><i className="fas fa-check-circle" style={{color: '#2980b9'}}></i> Experiência prática em automação e manutenção de sistemas.</li>
+                                            <li><i className="fas fa-check-circle" style={{color: '#2980b9'}}></i> Foco total em Segurança do Trabalho (CIPA/DSS).</li>
+                                        </ul>
+                                    </div>
+                                    <p style={{marginTop: '20px'}}>Solicite meu currículo completo: <br/> <strong>{dados.email}</strong></p>
+                                </div>
+                            )}
+
+                            {secao === 'projetos' && (
+                                <div>
+                                    <h2><i className="fas fa-project-diagram"></i> Projetos e Realizações</h2>
+                                    {dados.projetos.map((p, i) => (
+                                        <div key={i} className="item-card">
+                                            <strong>{p.titulo}</strong>
+                                            <p style={{fontSize: '0.9em', color: '#555', marginTop: '5px'}}>{p.desc}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {secao === 'certs' && (
+                                <div>
+                                    <h2><i className="fas fa-award"></i> Certificações</h2>
+                                    {dados.certificados.map((c, i) => (
+                                        <div key={i} className="item-card" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                            <strong>{c.nome}</strong>
+                                            <span style={{color: '#2980b9', fontSize: '0.8em', fontWeight: 'bold'}}>{c.cat}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {secao === 'mural' && (
+                                <div>
+                                    <h2><i className="fas fa-edit"></i> Mural</h2>
+                                    <p>Esta seção está em desenvolvimento.</p>
+                                    <div className="item-card">"O Eduardo demonstra grande domínio em otimização." <br/><small>— Equipe de Engenharia</small></div>
+                                </div>
+                            )}
+                        </div>
+                    </main>
+
+                    <a href={`https://wa.me/${dados.whatsapp}?text=Olá%20Eduardo,%20vi%20seu%20portfólio!`} className="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                        <i className="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            );
+        };
+
+        // Renderização final sem usar importação de módulo
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
