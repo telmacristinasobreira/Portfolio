@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Eduardo Araújo</title>
-    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Link para o CSS que vamos criar -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root"></div>
 
-    <!-- Bibliotecas de Scripts Estáveis -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -22,23 +19,27 @@
 
         const App = () => {
           const [secao, setSecao] = useState('perfil');
+          // Lógica do Mural (igual ao seu código funcional)
+          const [depoimentos, setDepoimentos] = useState([
+            { nome: "Equipe de Engenharia", texto: "O Eduardo demonstra grande domínio em otimização." }
+          ]);
+          const [novoNome, setNovoNome] = useState("");
+          const [novoTexto, setNovoTexto] = useState("");
 
           const dados = {
             nome: "Eduardo Filipe B. de Araújo",
             cargo: "Engenheiro Eletricista | Analista de Processos",
             foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew", 
             whatsapp: "5592992140488", 
-            email: "engeduardofilipe@gmail.com",
-            projetos: [
-              { nome: "Otimização de Processos", desc: "Estratégias para ganho de produtividade e redução de custos." },
-              { nome: "Gestão de Segurança", desc: "Condução de CIPA e Diálogos Semanais de Segurança (DSS)." },
-              { nome: "Automação Técnica", desc: "Manutenção e configuração de sistemas automatizados." }
-            ],
-            formacao: [
-              { nome: "Engenharia Elétrica", local: "Bacharelado", status: "Concluído" },
-              { nome: "NR-10 / NR-35", local: "Segurança do Trabalho", status: "Certificado" },
-              { nome: "Cronoanálise", local: "Especialista", status: "Certificado" }
-            ]
+            email: "engeduardofilipe@gmail.com"
+          };
+
+          const enviarRecado = (e) => {
+            e.preventDefault();
+            if (novoNome && novoTexto) {
+              setDepoimentos([{ nome: novoNome, texto: novoTexto }, ...depoimentos]);
+              setNovoNome(""); setNovoTexto("");
+            }
           };
 
           const BotaoVoltar = () => (
@@ -55,8 +56,7 @@
                 <p>{dados.cargo}</p>
                 <nav>
                   <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>SOBRE</button>
-                  <button className={`nav-link ${secao === 'projetos' ? 'active' : ''}`} onClick={() => setSecao('projetos')}>PROJETOS</button>
-                  <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}>FORMAÇÃO</button>
+                  <button className={`nav-link ${secao === 'mural' ? 'active' : ''}`} onClick={() => setSecao('mural')}>MURAL</button>
                 </nav>
               </header>
 
@@ -64,36 +64,29 @@
                 {secao === 'perfil' && (
                   <div>
                     <h2>Resumo Profissional</h2>
-                    <p>Engenheiro Eletricista focado em resultados de alta performance na Engenharia Industrial. Especialista em identificar gargalos e implementar melhorias operacionais.</p>
+                    <p>Engenheiro Eletricista focado em resultados de alta performance na Engenharia Industrial.</p>
                     <div className="info-box">
-                        <strong>Contatos:</strong>
-                        <p><i className="fas fa-envelope"></i> {dados.email}</p>
+                        <strong>E-mail:</strong> {dados.email}
                     </div>
                   </div>
                 )}
 
-                {secao === 'projetos' && (
+                {secao === 'mural' && (
                   <div>
-                    <h2>Projetos e Realizações</h2>
-                    {dados.projetos.map((p, i) => (
-                      <div key={i} className="item-card">
-                        <h3>{p.nome}</h3>
-                        <p>{p.desc}</p>
-                      </div>
-                    ))}
-                    <BotaoVoltar />
-                  </div>
-                )}
-
-                {secao === 'certs' && (
-                  <div>
-                    <h2>Formação e Certificações</h2>
-                    {dados.formacao.map((f, i) => (
-                      <div key={i} className="item-card">
-                        <strong>{f.nome}</strong>
-                        <p>{f.local} - <span className="status-tag">{f.status}</span></p>
-                      </div>
-                    ))}
+                    <h2><i className="fas fa-edit"></i> Mural de Recados</h2>
+                    <form onSubmit={enviarRecado} className="mural-form">
+                      <input placeholder="Seu nome" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
+                      <textarea placeholder="Sua mensagem" value={novoTexto} onChange={(e) => setNovoTexto(e.target.value)} rows="3" />
+                      <button type="submit" className="btn-post">Publicar Recado</button>
+                    </form>
+                    <div style={{marginTop: '20px'}}>
+                        {depoimentos.map((d, i) => (
+                        <div key={i} className="item-card">
+                            <p>"{d.texto}"</p>
+                            <small>— <strong>{d.nome}</strong></small>
+                        </div>
+                        ))}
+                    </div>
                     <BotaoVoltar />
                   </div>
                 )}
