@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,83 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Eduardo Filipe</title>
     
-    <!-- Ícones e Fontes -->
+    <!-- Bibliotecas (Carregamento garantido) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <style>
-        /* CSS INTEGRADO - O mesmo que usamos antes */
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; }
-        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; }
-        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; display: block; margin: 0 auto 15px; object-fit: cover; }
-        nav { margin-top: 25px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 18px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.8em; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; }
+        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto 15px; object-fit: cover; }
+        nav { margin-top: 25px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.8em; }
         .nav-link.active { background: white; color: #b71c1c; }
-        .card { background: white; max-width: 800px; margin: -30px auto 40px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
-        .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 15px; margin-bottom: 12px; border-radius: 8px; text-align: left; }
-        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; }
-        
-        /* Cores das Teclas */
-        .tecla { width: 50px; height: 150px; border-radius: 0 0 10px 10px; display: inline-block; margin: 4px; cursor: pointer; border: 1px solid #333; }
-        .tecla:nth-child(1) { background: #ff4d4d !important; }
-        .tecla:nth-child(2) { background: #ff9933 !important; }
-        .tecla:nth-child(3) { background: #ffcc00 !important; }
-        .tecla:nth-child(4) { background: #33cc33 !important; }
-        .tecla:nth-child(5) { background: #3399ff !important; }
-        .tecla:nth-child(6) { background: #3333cc !important; }
-        .tecla:nth-child(7) { background: #9933cc !important; }
+        .card { background: white; max-width: 700px; margin: -40px auto 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 15px; margin-bottom: 10px; border-radius: 8px; text-align: left; }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .tecla { width: 40px; height: 120px; border-radius: 0 0 5px 5px; display: inline-block; margin: 3px; border: 1px solid #333; }
     </style>
 </head>
 <body>
 
     <div id="root"></div>
 
-    <!-- Carregando React via CDN (Importante para não ficar em branco) -->
-    <script type="module">
-        import React, { useState } from "https://esm.sh/react@19";
-        import ReactDOM from "https://esm.sh/react-dom@19/client";
+    <script type="text/babel">
+        const { useState } = React;
 
-        const App = () => {
+        function App() {
             const [secao, setSecao] = useState('perfil');
+
             const dados = {
-                nome: "Eduardo Filipe Bonifácio de Araújo",
+                nome: "Eduardo Filipe B. de Araújo",
                 cargo: "Engenheiro Eletricista | Analista de Processos",
                 foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew",
-                whatsapp: "5592992140488",
-                email: "engeduardofilipe@gmail.com",
-                certificados: [
-                    { nome: "Cronometragem e Cronoanálise", cat: "Engenharia" },
-                    { nome: "NR 10 - Segurança Elétrica", cat: "Segurança" }
-                ]
+                whatsapp: "5592992140488"
             };
 
             return (
                 <div>
                     <header>
-                        <img src={dados.foto} className="profile-photo" />
+                        <img src={dados.foto} className="profile-photo" alt="Perfil" />
                         <h1>{dados.nome}</h1>
                         <p>{dados.cargo}</p>
                         <nav>
-                            <button className="nav-link" onClick={() => setSecao('perfil')}>Sobre</button>
-                            <button className="nav-link" onClick={() => setSecao('certs')}>Certificações</button>
-                            <button className="nav-link" onClick={() => setSecao('sons')}>Sons</button>
+                            <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>Sobre</button>
+                            <button className={`nav-link ${secao === 'sons' ? 'active' : ''}`} onClick={() => setSecao('sons')}>Teclado</button>
                         </nav>
                     </header>
-                    <main>
+
+                    <main style={{padding: '0 20px'}}>
                         <div className="card">
-                            {secao === 'perfil' && <div><h2>Sobre Mim</h2><p>Especialista em processos industriais.</p></div>}
-                            {secao === 'certs' && <div><h2>Certificações</h2>{dados.certificados.map(c => <div className="item-card"><strong>{c.nome}</strong></div>)}</div>}
-                            {secao === 'sons' && <div className="grade">
-                                {[1,2,3,4,5,6,7].map(i => <div key={i} className="tecla"></div>)}
-                            </div>}
+                            {secao === 'perfil' ? (
+                                <div>
+                                    <h2>Engenharia e Manufatura</h2>
+                                    <div className="item-card"><strong>Especialista em Processos</strong><p>Otimização e redução de custos industriais.</p></div>
+                                    <div className="item-card"><strong>Segurança</strong><p>Atuação ativa em CIPA e normas regulamentadoras.</p></div>
+                                </div>
+                            ) : (
+                                <div>
+                                    <h2>Painel de Sons</h2>
+                                    <div className="tecla" style={{background: '#ff4d4d'}}></div>
+                                    <div className="tecla" style={{background: '#ff9933'}}></div>
+                                    <div className="tecla" style={{background: '#ffcc00'}}></div>
+                                    <div className="tecla" style={{background: '#33cc33'}}></div>
+                                    <div className="tecla" style={{background: '#3399ff'}}></div>
+                                </div>
+                            )}
                         </div>
                     </main>
-                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn"><i className="fab fa-whatsapp"></i></a>
+
+                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank">
+                        <i className="fab fa-whatsapp"></i>
+                    </a>
                 </div>
             );
-        };
+        }
 
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(React.createElement(App));
+        root.render(<App />);
     </script>
 </body>
 </html>
