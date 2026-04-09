@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Eduardo Araújo</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* CSS: Aqui definimos as cores e o visual */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f7f6; color: #333; }
+        header { background-color: #c0392b; color: white; text-align: center; padding: 40px 20px; }
+        .profile-photo { width: 150px; height: 150px; border-radius: 50%; border: 4px solid white; object-fit: cover; margin-bottom: 15px; }
+        nav { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .nav-link { background: rgba(255,255,255,0.2); border: none; color: white; padding: 10px 20px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+        .nav-link.active { background: white; color: #c0392b; }
+        .card { background: white; max-width: 800px; margin: -30px auto 40px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        .item-card { background: #f9f9f9; padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 5px solid #c0392b; text-align: left; }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; }
+        input, textarea { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
+        .btn-post { background: #c0392b; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="module">
+        import React, { useState } from "https://esm.sh/react@19";
+        import ReactDOM from "https://esm.sh/react-dom@19/client";
+
+        const App = () => {
+            const [secao, setSecao] = useState('perfil');
+            const [depoimentos, setDepoimentos] = useState([
+                { nome: "Equipe de Engenharia", texto: "O Eduardo demonstra grande domínio em otimização de processos." },
+                { nome: "Setor Industrial", texto: "Focado em melhoria contínua e segurança operacional." }
+            ]);
+            
+            const [novoNome, setNovoNome] = useState("");
+            const [novoTexto, setNovoTexto] = useState("");
+
+            const dados = {
+                nome: "Eduardo Filipe Bonifácio de Araújo",
+                cargo: <span>Engenheiro Eletricista <i className="fas fa-bolt" style={{color: '#f1c40f'}}></i> | Analista de Processos</span>,
+                foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew", 
+                whatsapp: "5592992140488", 
+                email: "engeduardofilipe@gmail.com",
+                
+                projetos: [
+                    { titulo: "Otimização de Manufatura", desc: "Estratégias técnicas para ganho de produtividade e ergonomia." },
+                    { titulo: "Gestão CIPA", desc: "Avaliação de riscos e Diálogos de Segurança (DSS)." },
+                    { titulo: "Automação Bancária", desc: "6 anos de manutenção e configuração de sistemas automatizados." }
+                ],
+
+                certificados: [
+                    { nome: "Cronometragem e Cronoanálise: Nível Especialista", cat: "Engenharia" },
+                    { nome: "NR 10 - Segurança em Eletricidade", cat: "Segurança" },
+                    { nome: "AutoCAD", cat: "Projetos" },
+                    { nome: "Inglês Avançado", cat: "Idiomas" }
+                ]
+            };
+
+            const enviarRecado = (e) => {
+                e.preventDefault();
+                if (novoNome && novoTexto) {
+                    setDepoimentos([{ nome: novoNome, texto: novoTexto }, ...depoimentos]);
+                    setNovoNome(""); setNovoTexto("");
+                }
+            };
+
+            return (
+                <div>
+                    <header>
+                        <img src={dados.foto} className="profile-photo" alt="Perfil" />
+                        <h1>{dados.nome}</h1>
+                        <p>{dados.cargo}</p>
+                        <nav>
+                            <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>SOBRE</button>
+                            <button className={`nav-link ${secao === 'projetos' ? 'active' : ''}`} onClick={() => setSecao('projetos')}>PROJETOS</button>
+                            <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}>CERTIFICAÇÕES</button>
+                            <button className={`nav-link ${secao === 'mural' ? 'active' : ''}`} onClick={() => setSecao('mural')}>MURAL</button>
+                        </nav>
+                    </header>
+
+                    <main style={{padding: '0 20px'}}>
+                        <div className="card">
+                            {secao === 'perfil' && (
+                                <div style={{textAlign: 'left'}}>
+                                    <h2>Bem-vindo!</h2>
+                                    <p><strong>Engenheiro Eletricista</strong> focado em otimização de processos e melhoria contínua na Engenharia Industrial.</p>
+                                    <p>Especialista em identificar gargalos e implementar soluções que reduzem custos e elevam a eficiência.</p>
+                                </div>
+                            )}
+
+                            {secao === 'projetos' && (
+                                <div>
+                                    <h2>Projetos</h2>
+                                    {dados.projetos.map((p, i) => (
+                                        <div key={i} className="item-card"><strong>{p.titulo}</strong><p>{p.desc}</p></div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {secao === 'certs' && (
+                                <div>
+                                    <h2>Certificações</h2>
+                                    {dados.certificados.map((c, i) => (
+                                        <div key={i} className="item-card"><strong>{c.nome}</strong><br/><small>{c.cat}</small></div>
+                                    ))}
+                                </div>
+                            )}
+
+                            {secao === 'mural' && (
+                                <div>
+                                    <h2>Mural</h2>
+                                    <form onSubmit={enviarRecado}>
+                                        <input placeholder="Nome" value={novoNome} onChange={e => setNovoNome(e.target.value)} />
+                                        <textarea placeholder="Mensagem" value={novoTexto} onChange={e => setNovoTexto(e.target.value)} />
+                                        <button className="btn-post">Enviar</button>
+                                    </form>
+                                    {depoimentos.map((d, i) => (
+                                        <div key={i} className="item-card"><p>"{d.texto}"</p><small>— {d.nome}</small></div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </main>
+
+                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank"><i className="fab fa-whatsapp"></i></a>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
