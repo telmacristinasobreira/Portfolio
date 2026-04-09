@@ -19,7 +19,6 @@
 
         const App = () => {
           const [secao, setSecao] = useState('perfil');
-          // Lógica do Mural (igual ao seu código funcional)
           const [depoimentos, setDepoimentos] = useState([
             { nome: "Equipe de Engenharia", texto: "O Eduardo demonstra grande domínio em otimização." }
           ]);
@@ -27,11 +26,21 @@
           const [novoTexto, setNovoTexto] = useState("");
 
           const dados = {
-            nome: "Eduardo Filipe B. de Araújo",
-            cargo: "Engenheiro Eletricista | Analista de Processos",
+            nome: "Eduardo Filipe Bonifácio de Araújo",
+            cargo: "Engenheiro Eletricista ⚡ | Analista de Processos",
             foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew", 
             whatsapp: "5592992140488", 
-            email: "engeduardofilipe@gmail.com"
+            email: "engeduardofilipe@gmail.com",
+            projetos: [
+              { titulo: "Otimização de Processos de Manufatura", desc: "Estratégias para ganho de produtividade e redução de custos." },
+              { titulo: "Gestão de Segurança e CIPA", desc: "Condução de avaliações de riscos e melhorias operacionais." },
+              { titulo: "Automação e Manutenção Técnica", desc: "Experiência em sistemas automatizados de alta complexidade." }
+            ],
+            certificados: [
+              { nome: "Cronometragem e Cronoanálise", cat: "Especialista" },
+              { nome: "NR 10 - Segurança em Eletricidade", cat: "Segurança" },
+              { nome: "Inglês Avançado", cat: "Idiomas" }
+            ]
           };
 
           const enviarRecado = (e) => {
@@ -56,6 +65,8 @@
                 <p>{dados.cargo}</p>
                 <nav>
                   <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>SOBRE</button>
+                  <button className={`nav-link ${secao === 'projetos' ? 'active' : ''}`} onClick={() => setSecao('projetos')}>PROJETOS</button>
+                  <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}>CERTIFICAÇÕES</button>
                   <button className={`nav-link ${secao === 'mural' ? 'active' : ''}`} onClick={() => setSecao('mural')}>MURAL</button>
                 </nav>
               </header>
@@ -63,44 +74,36 @@
               <main className="card">
                 {secao === 'perfil' && (
                   <div>
-                    <h2>Resumo Profissional</h2>
-                    <p>Engenheiro Eletricista focado em resultados de alta performance na Engenharia Industrial.</p>
+                    <h2><i className="fas fa-star" style={{color: '#ffd700'}}></i> Bem-vindo!</h2>
+                    <p>Atualmente, transformo dados e rotinas operacionais em resultados de alta performance na Engenharia Industrial.</p>
                     <div className="info-box">
-                        <strong>E-mail:</strong> {dados.email}
+                        <strong>Contato:</strong> {dados.email}
                     </div>
                   </div>
                 )}
 
-                {secao === 'mural' && (
+                {secao === 'projetos' && (
                   <div>
-                    <h2><i className="fas fa-edit"></i> Mural de Recados</h2>
-                    <form onSubmit={enviarRecado} className="mural-form">
-                      <input placeholder="Seu nome" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
-                      <textarea placeholder="Sua mensagem" value={novoTexto} onChange={(e) => setNovoTexto(e.target.value)} rows="3" />
-                      <button type="submit" className="btn-post">Publicar Recado</button>
-                    </form>
-                    <div style={{marginTop: '20px'}}>
-                        {depoimentos.map((d, i) => (
-                        <div key={i} className="item-card">
-                            <p>"{d.texto}"</p>
-                            <small>— <strong>{d.nome}</strong></small>
-                        </div>
-                        ))}
-                    </div>
+                    <h2><i className="fas fa-project-diagram"></i> Projetos</h2>
+                    {dados.projetos.map((p, i) => (
+                      <div key={i} className="item-card">
+                        <strong>{p.titulo}</strong>
+                        <p style={{fontSize: '0.9em', color: '#555'}}>{p.desc}</p>
+                      </div>
+                    ))}
                     <BotaoVoltar />
                   </div>
                 )}
-              </main>
 
-              <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank">
-                <i className="fab fa-whatsapp"></i>
-              </a>
-            </div>
-          );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                {secao === 'certs' && (
+                  <div>
+                    <h2><i className="fas fa-award"></i> Certificações</h2>
+                    {dados.certificados.map((c, i) => (
+                      <div key={i} className="item-card">
+                        <strong>{c.nome}</strong>
+                        <div style={{color: '#2980b9', fontSize: '0.8em', fontWeight: 'bold'}}>{c.cat}</div>
+                      </div>
+                    ))}
+                    <BotaoVoltar />
+                  </div>
+                )}
