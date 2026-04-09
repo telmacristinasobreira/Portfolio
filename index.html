@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Eduardo Araújo</title>
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Seu CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="root"></div>
 
+    <!-- Bibliotecas React e Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -19,28 +22,40 @@
 
         const App = () => {
           const [secao, setSecao] = useState('perfil');
+          const [dark, setDark] = useState(false);
           const [depoimentos, setDepoimentos] = useState([
-            { nome: "Equipe de Engenharia", texto: "O Eduardo demonstra grande domínio em otimização." }
+            { nome: "Equipe Técnica", texto: "O Eduardo é um excelente profissional!" }
           ]);
           const [novoNome, setNovoNome] = useState("");
           const [novoTexto, setNovoTexto] = useState("");
 
           const dados = {
-            nome: "Eduardo Filipe Bonifácio de Araújo",
-            cargo: "Engenheiro Eletricista ⚡ | Analista de Processos",
+            nome: "Eduardo Filipe B. de Araújo",
+            cargo: "Engenheiro Eletricista | Analista de Processos Industriais",
             foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew", 
             whatsapp: "5592992140488", 
             email: "engeduardofilipe@gmail.com",
-            projetos: [
-              { titulo: "Otimização de Processos de Manufatura", desc: "Estratégias para ganho de produtividade e redução de custos." },
-              { titulo: "Gestão de Segurança e CIPA", desc: "Condução de avaliações de riscos e melhorias operacionais." },
-              { titulo: "Automação e Manutenção Técnica", desc: "Experiência em sistemas automatizados de alta complexidade." }
+            skills: [
+              { nome: "Engenharia", icone: "fas fa-bolt", cor: "#f7df1e" },
+              { nome: "Processos", icone: "fas fa-industry", cor: "#1572b6" },
+              { nome: "Segurança", icone: "fas fa-hard-hat", cor: "#e34f26" },
+              { nome: "Gestão", icone: "fas fa-tasks", cor: "#61dafb" }
             ],
-            certificados: [
-              { nome: "Cronometragem e Cronoanálise", cat: "Especialista" },
-              { nome: "NR 10 - Segurança em Eletricidade", cat: "Segurança" },
-              { nome: "Inglês Avançado", cat: "Idiomas" }
+            projetos: [
+              { nome: "Otimização Industrial", desc: "Melhoria de processos e redução de desperdícios.", link: "#" },
+              { nome: "Gestão de CIPA", desc: "Implementação de normas de segurança e treinamentos.", link: "#" },
+              { nome: "Automação Técnica", desc: "Configuração de sistemas e manutenção elétrica.", link: "#" }
+            ],
+            formacao: [
+              { nome: "Graduação: Engenharia Elétrica", local: "Bacharelado Completo", status: "Concluído" },
+              { nome: "Especialização: Cronoanálise", local: "Análise de Processos", status: "Concluído" },
+              { nome: "NR-10 / NR-35", local: "Segurança do Trabalho", status: "Certificado" }
             ]
+          };
+
+          const toggleDark = () => {
+            setDark(!dark);
+            document.body.classList.toggle('dark-mode');
           };
 
           const enviarRecado = (e) => {
@@ -51,8 +66,18 @@
             }
           };
 
+          const abrirEmail = () => {
+            window.location.href = `mailto:${dados.email}`;
+          };
+
           const BotaoVoltar = () => (
-            <button onClick={() => setSecao('perfil')} className="back-btn">
+            <button 
+              onClick={() => setSecao('perfil')}
+              style={{
+                background: 'none', border: 'none', color: 'var(--primary-red)',
+                cursor: 'pointer', fontSize: '0.9em', fontWeight: 'bold',
+                marginTop: '20px', display: 'flex', alignItems: 'center', gap: '8px', padding: '5px 0'
+              }}>
               <i className="fas fa-arrow-left"></i> Voltar ao Início
             </button>
           );
@@ -60,13 +85,16 @@
           return (
             <div>
               <header>
+                <button onClick={toggleDark} className="dark-toggle">
+                  <i className={dark ? "fas fa-sun" : "fas fa-moon"}></i>
+                </button>
                 <img src={dados.foto} alt={dados.nome} className="profile-photo" />
                 <h1>{dados.nome}</h1>
                 <p>{dados.cargo}</p>
                 <nav>
                   <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>SOBRE</button>
                   <button className={`nav-link ${secao === 'projetos' ? 'active' : ''}`} onClick={() => setSecao('projetos')}>PROJETOS</button>
-                  <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}>CERTIFICAÇÕES</button>
+                  <button className={`nav-link ${secao === 'certs' ? 'active' : ''}`} onClick={() => setSecao('certs')}>FORMAÇÃO</button>
                   <button className={`nav-link ${secao === 'mural' ? 'active' : ''}`} onClick={() => setSecao('mural')}>MURAL</button>
                 </nav>
               </header>
@@ -74,36 +102,88 @@
               <main className="card">
                 {secao === 'perfil' && (
                   <div>
-                    <h2><i className="fas fa-star" style={{color: '#ffd700'}}></i> Bem-vindo!</h2>
-                    <p>Atualmente, transformo dados e rotinas operacionais em resultados de alta performance na Engenharia Industrial.</p>
-                    <div className="info-box">
-                        <strong>Contato:</strong> {dados.email}
+                    <h2>Resumo Profissional</h2>
+                    <p style={{textAlign: 'justify', lineHeight: '1.6'}}>
+                      Engenheiro Eletricista focado na otimização de processos industriais e engenharia de manufatura. Experiência sólida em gestão de segurança (CIPA), treinamentos de NR e aumento de produtividade operacional.
+                    </p>
+                    <button onClick={abrirEmail} className="email-btn-custom">
+                      <i className="fas fa-envelope"></i> Entrar em Contato por E-mail
+                    </button>
+
+                    <div style={{display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '30px', flexWrap: 'wrap'}}>
+                      {dados.skills.map((s, i) => (
+                        <div key={i} style={{textAlign: 'center', width: '80px'}}>
+                          <i className={s.icone} style={{fontSize: '2.5em', color: s.cor, display: 'block'}}></i>
+                          <span style={{fontSize: '0.7em', fontWeight: 'bold'}}>{s.nome}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
 
                 {secao === 'projetos' && (
                   <div>
-                    <h2><i className="fas fa-project-diagram"></i> Projetos</h2>
-                    {dados.projetos.map((p, i) => (
-                      <div key={i} className="item-card">
-                        <strong>{p.titulo}</strong>
-                        <p style={{fontSize: '0.9em', color: '#555'}}>{p.desc}</p>
-                      </div>
-                    ))}
+                    <h2>Projetos e Realizações</h2>
+                    <div className="grid-projetos">
+                      {dados.projetos.map((p, i) => (
+                        <div key={i} className="item-card" style={{borderTop: '4px solid var(--primary-red)', borderLeft: 'none'}}>
+                          <h3>{p.nome}</h3>
+                          <p>{p.desc}</p>
+                        </div>
+                      ))}
+                    </div>
                     <BotaoVoltar />
                   </div>
                 )}
 
                 {secao === 'certs' && (
                   <div>
-                    <h2><i className="fas fa-award"></i> Certificações</h2>
-                    {dados.certificados.map((c, i) => (
+                    <h2>Certificações e Formação</h2>
+                    {dados.formacao.map((f, i) => (
                       <div key={i} className="item-card">
-                        <strong>{c.nome}</strong>
-                        <div style={{color: '#2980b9', fontSize: '0.8em', fontWeight: 'bold'}}>{c.cat}</div>
+                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                          <strong>{f.nome}</strong>
+                          <span className="status-tag">{f.status}</span>
+                        </div>
+                        <p className="local-text">{f.local}</p>
                       </div>
                     ))}
                     <BotaoVoltar />
                   </div>
                 )}
+
+                {secao === 'mural' && (
+                  <div>
+                    <h2>Mural de Recados</h2>
+                    <form onSubmit={enviarRecado} className="mural-form">
+                      <input placeholder="Seu nome" value={novoNome} onChange={(e) => setNovoNome(e.target.value)} />
+                      <textarea placeholder="Sua mensagem" value={novoTexto} onChange={(e) => setNovoTexto(e.target.value)} rows="3" />
+                      <button type="submit" className="btn-post">Publicar Recado</button>
+                    </form>
+                    {depoimentos.map((d, i) => (
+                      <div key={i} className="item-card">
+                        <p>{d.texto}</p>
+                        <small>— <strong>{d.nome}</strong></small>
+                      </div>
+                    ))}
+                    <BotaoVoltar />
+                  </div>
+                )}
+              </main>
+
+              <div className="footer-info">
+                 Manaus, AM | {dados.email}
+              </div>
+
+              <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank">
+                <i className="fab fa-whatsapp"></i>
+              </a>
+            </div>
+          );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
