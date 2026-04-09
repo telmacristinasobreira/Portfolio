@@ -1,39 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Eduardo Filipe</title>
     
-    <!-- Bibliotecas (Carregamento garantido) -->
+    <!-- Bibliotecas de Suporte -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; }
-        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto 15px; object-fit: cover; }
-        nav { margin-top: 25px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.8em; }
-        .nav-link.active { background: white; color: #b71c1c; }
-        .card { background: white; max-width: 700px; margin: -40px auto 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
-        .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 15px; margin-bottom: 10px; border-radius: 8px; text-align: left; }
-        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .tecla { width: 40px; height: 120px; border-radius: 0 0 5px 5px; display: inline-block; margin: 3px; border: 1px solid #333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; }
+        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; display: block; margin: 0 auto 15px; object-fit: cover; }
+        nav { margin-top: 25px; display: flex; justify-content: center; gap: 12px; }
+        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 18px; border-radius: 30px; cursor: pointer; text-transform: uppercase; font-size: 0.8em; }
+        .card { background: white; max-width: 600px; margin: -30px auto 40px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; }
     </style>
 </head>
 <body>
 
     <div id="root"></div>
 
+    <!-- MUDANÇA CRUCIAL: type="text/babel" em vez de module -->
     <script type="text/babel">
-        const { useState } = React;
-
         function App() {
-            const [secao, setSecao] = useState('perfil');
-
             const dados = {
                 nome: "Eduardo Filipe B. de Araújo",
                 cargo: "Engenheiro Eletricista | Analista de Processos",
@@ -44,37 +38,21 @@
             return (
                 <div>
                     <header>
-                        <img src={dados.foto} className="profile-photo" alt="Perfil" />
+                        <img src={dados.foto} className="profile-photo" alt="Foto" />
                         <h1>{dados.nome}</h1>
                         <p>{dados.cargo}</p>
                         <nav>
-                            <button className={`nav-link ${secao === 'perfil' ? 'active' : ''}`} onClick={() => setSecao('perfil')}>Sobre</button>
-                            <button className={`nav-link ${secao === 'sons' ? 'active' : ''}`} onClick={() => setSecao('sons')}>Teclado</button>
+                            <button className="nav-link">Sobre</button>
+                            <button className="nav-link">Certificações</button>
                         </nav>
                     </header>
-
-                    <main style={{padding: '0 20px'}}>
+                    <main>
                         <div className="card">
-                            {secao === 'perfil' ? (
-                                <div>
-                                    <h2>Engenharia e Manufatura</h2>
-                                    <div className="item-card"><strong>Especialista em Processos</strong><p>Otimização e redução de custos industriais.</p></div>
-                                    <div className="item-card"><strong>Segurança</strong><p>Atuação ativa em CIPA e normas regulamentadoras.</p></div>
-                                </div>
-                            ) : (
-                                <div>
-                                    <h2>Painel de Sons</h2>
-                                    <div className="tecla" style={{background: '#ff4d4d'}}></div>
-                                    <div className="tecla" style={{background: '#ff9933'}}></div>
-                                    <div className="tecla" style={{background: '#ffcc00'}}></div>
-                                    <div className="tecla" style={{background: '#33cc33'}}></div>
-                                    <div className="tecla" style={{background: '#3399ff'}}></div>
-                                </div>
-                            )}
+                            <h2>Olá!</h2>
+                            <p>O portfólio está carregando corretamente agora.</p>
                         </div>
                     </main>
-
-                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn" target="_blank">
+                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn">
                         <i className="fab fa-whatsapp"></i>
                     </a>
                 </div>
