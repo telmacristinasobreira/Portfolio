@@ -5,46 +5,50 @@
   <title>Portfólio</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
 <header>
-  <img src="https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew" class="profile-photo">
+  <img src="https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200" class="profile-photo">
   <h1>Eduardo Filipe Bonifácio de Araújo</h1>
   <p>Engenheiro Eletricista ⚡ | Analista de Processos</p>
+
+  <nav>
+    <button onclick="mostrar('sobre')" class="nav-link active">SOBRE</button>
+    <button onclick="mostrar('projetos')" class="nav-link">PROJETOS</button>
+    <button onclick="mostrar('certs')" class="nav-link">CERTIFICAÇÕES</button>
+    <button onclick="mostrar('mural')" class="nav-link">MURAL</button>
+  </nav>
 </header>
 
 <main>
   <div class="card">
 
-    <h2>Sobre</h2>
-    <p>
-      Engenheiro Eletricista apaixonado por processos industriais e otimização.
-      Focado em melhoria contínua, redução de custos e aumento de eficiência.
-    </p>
-
-    <h2>Projetos</h2>
-
-    <div class="item-card">
-      <strong>Otimização de Processos</strong>
-      <p>Redução de custos e aumento de produtividade.</p>
+    <div id="sobre" class="secao">
+      <h2>⭐ Bem-vindo ao meu Portfólio!</h2>
+      <p>Engenheiro Eletricista apaixonado por processos industriais e otimização.</p>
     </div>
 
-    <div class="item-card">
-      <strong>Segurança e CIPA</strong>
-      <p>Implementação de melhorias operacionais e segurança.</p>
+    <div id="projetos" class="secao" style="display:none">
+      <h2>Projetos</h2>
+      <div class="item-card">Otimização de Processos</div>
+      <div class="item-card">Segurança e CIPA</div>
+      <div class="item-card">Automação Industrial</div>
     </div>
 
-    <div class="item-card">
-      <strong>Automação Industrial</strong>
-      <p>Experiência em manutenção e sistemas automatizados.</p>
+    <div id="certs" class="secao" style="display:none">
+      <h2>Certificações</h2>
+      <div class="item-card">NR 10</div>
+      <div class="item-card">AutoCAD</div>
+      <div class="item-card">Inglês Avançado</div>
     </div>
 
-    <h2>Contato</h2>
-    <p>Email: <strong>engeduardofilipe@gmail.com</strong></p>
+    <div id="mural" class="secao" style="display:none">
+      <h2>Mural</h2>
+      <p>Área de mensagens simples</p>
+    </div>
 
   </div>
 </main>
@@ -52,6 +56,16 @@
 <a href="https://wa.me/5592992140488" class="whatsapp-btn" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
+
+<script>
+function mostrar(secao) {
+  document.querySelectorAll('.secao').forEach(el => el.style.display = 'none');
+  document.getElementById(secao).style.display = 'block';
+
+  document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
 
 </body>
 </html>
