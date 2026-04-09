@@ -5,62 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Eduardo Filipe</title>
     
-    <!-- Bibliotecas de Suporte -->
+    <!-- Bibliotecas de Suporte (Não remova) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; }
-        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; }
-        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; display: block; margin: 0 auto 15px; object-fit: cover; }
-        nav { margin-top: 25px; display: flex; justify-content: center; gap: 12px; }
-        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 18px; border-radius: 30px; cursor: pointer; text-transform: uppercase; font-size: 0.8em; }
-        .card { background: white; max-width: 600px; margin: -30px auto 40px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
-        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; }
+        /* O SEU DESIGN ORIGINAL DO CODEPEN */
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; }
+        header { background-color: #b71c1c; color: white; padding: 50px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        header h1 { margin: 10px 0; font-size: 2.2em; }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: block; margin: 0 auto 15px; object-fit: cover; }
+        nav { margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.4); color: white; padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.85em; transition: 0.3s; }
+        .nav-link.active { background: white; color: #b71c1c; border-color: white; }
+        .card { background: white; max-width: 750px; margin: -40px auto 40px; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 20px; margin-bottom: 15px; border-radius: 8px; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: 0.3s; }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+        .info-box { background: #eef2f7; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: left; }
     </style>
 </head>
 <body>
-
     <div id="root"></div>
 
-    <!-- MUDANÇA CRUCIAL: type="text/babel" em vez de module -->
     <script type="text/babel">
-        function App() {
+        const { useState } = React;
+
+        const App = () => {
+            const [secao, setSecao] = useState('perfil');
+
             const dados = {
-                nome: "Eduardo Filipe B. de Araújo",
-                cargo: "Engenheiro Eletricista | Analista de Processos",
+                nome: "Eduardo Filipe Bonifácio de Araújo",
+                cargo: "Engenheiro Eletricista ⚡ | Analista de Processos",
                 foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew",
-                whatsapp: "5592992140488"
+                email: "engeduardofilipe@gmail.com",
+                whatsapp: "5592992140488",
+                projetos: [
+                    { t: "Otimização de Processos de Manufatura", d: "Estratégias técnicas para produtividade e redução de custos." },
+                    { t: "Gestão de Segurança e CIPA", d: "Avaliações de riscos e melhorias operacionais (DSS)." },
+                    { t: "Automação e Manutenção Técnica", d: "Configuração de sistemas automatizados de alta complexidade." }
+                ]
             };
 
             return (
                 <div>
                     <header>
-                        <img src={dados.foto} className="profile-photo" alt="Foto" />
-                        <h1>{dados.nome}</h1>
-                        <p>{dados.cargo}</p>
-                        <nav>
-                            <button className="nav-link">Sobre</button>
-                            <button className="nav-link">Certificações</button>
-                        </nav>
-                    </header>
-                    <main>
-                        <div className="card">
-                            <h2>Olá!</h2>
-                            <p>O portfólio está carregando corretamente agora.</p>
-                        </div>
-                    </main>
-                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn">
-                        <i className="fab fa-whatsapp"></i>
-                    </a>
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                        <img src={dados.foto}
