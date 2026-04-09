@@ -1,49 +1,88 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Portfólio</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Eduardo Filipe</title>
+    
+    <!-- Ícones e Fontes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* CSS INTEGRADO - O mesmo que usamos antes */
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; }
+        header { background-color: #b71c1c; color: white; padding: 40px 20px; text-align: center; }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; border: 4px solid white; display: block; margin: 0 auto 15px; object-fit: cover; }
+        nav { margin-top: 25px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .nav-link { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); color: white; padding: 8px 18px; border-radius: 30px; cursor: pointer; font-weight: 600; text-transform: uppercase; font-size: 0.8em; }
+        .nav-link.active { background: white; color: #b71c1c; }
+        .card { background: white; max-width: 800px; margin: -30px auto 40px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }
+        .item-card { border-left: 5px solid #b71c1c; background: #fdfdfd; padding: 15px; margin-bottom: 12px; border-radius: 8px; text-align: left; }
+        .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; text-decoration: none; z-index: 1000; }
+        
+        /* Cores das Teclas */
+        .tecla { width: 50px; height: 150px; border-radius: 0 0 10px 10px; display: inline-block; margin: 4px; cursor: pointer; border: 1px solid #333; }
+        .tecla:nth-child(1) { background: #ff4d4d !important; }
+        .tecla:nth-child(2) { background: #ff9933 !important; }
+        .tecla:nth-child(3) { background: #ffcc00 !important; }
+        .tecla:nth-child(4) { background: #33cc33 !important; }
+        .tecla:nth-child(5) { background: #3399ff !important; }
+        .tecla:nth-child(6) { background: #3333cc !important; }
+        .tecla:nth-child(7) { background: #9933cc !important; }
+    </style>
 </head>
-
 <body>
 
-<div id="root"></div>
+    <div id="root"></div>
 
-<script type="module">
-import React, { useState } from "https://esm.sh/react@19";
-import ReactDOM from "https://esm.sh/react-dom@19/client";
+    <!-- Carregando React via CDN (Importante para não ficar em branco) -->
+    <script type="module">
+        import React, { useState } from "https://esm.sh/react@19";
+        import ReactDOM from "https://esm.sh/react-dom@19/client";
 
-const App = () => {
-  const [secao, setSecao] = useState('perfil');
+        const App = () => {
+            const [secao, setSecao] = useState('perfil');
+            const dados = {
+                nome: "Eduardo Filipe Bonifácio de Araújo",
+                cargo: "Engenheiro Eletricista | Analista de Processos",
+                foto: "https://media.licdn.com/dms/image/v2/C4D03AQGF04xwpKSAdw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1663639643646?e=1777507200&v=beta&t=1UT263VsbBl1BPXaAzMtrKpwm8eM-zZ_qXWO9beaiew",
+                whatsapp: "5592992140488",
+                email: "engeduardofilipe@gmail.com",
+                certificados: [
+                    { nome: "Cronometragem e Cronoanálise", cat: "Engenharia" },
+                    { nome: "NR 10 - Segurança Elétrica", cat: "Segurança" }
+                ]
+            };
 
-  return (
-    <div>
-      <header>
-        <h1>Eduardo Filipe Bonifácio</h1>
+            return (
+                <div>
+                    <header>
+                        <img src={dados.foto} className="profile-photo" />
+                        <h1>{dados.nome}</h1>
+                        <p>{dados.cargo}</p>
+                        <nav>
+                            <button className="nav-link" onClick={() => setSecao('perfil')}>Sobre</button>
+                            <button className="nav-link" onClick={() => setSecao('certs')}>Certificações</button>
+                            <button className="nav-link" onClick={() => setSecao('sons')}>Sons</button>
+                        </nav>
+                    </header>
+                    <main>
+                        <div className="card">
+                            {secao === 'perfil' && <div><h2>Sobre Mim</h2><p>Especialista em processos industriais.</p></div>}
+                            {secao === 'certs' && <div><h2>Certificações</h2>{dados.certificados.map(c => <div className="item-card"><strong>{c.nome}</strong></div>)}</div>}
+                            {secao === 'sons' && <div className="grade">
+                                {[1,2,3,4,5,6,7].map(i => <div key={i} className="tecla"></div>)}
+                            </div>}
+                        </div>
+                    </main>
+                    <a href={`https://wa.me/${dados.whatsapp}`} className="whatsapp-btn"><i className="fab fa-whatsapp"></i></a>
+                </div>
+            );
+        };
 
-        <nav>
-          <button onClick={() => setSecao('perfil')}>SOBRE</button>
-          <button onClick={() => setSecao('projetos')}>PROJETOS</button>
-        </nav>
-      </header>
-
-      <div className="card">
-        {secao === 'perfil' && <h2>Sobre</h2>}
-        {secao === 'projetos' && <h2>Projetos</h2>}
-      </div>
-    </div>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
-</script>
-
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(App));
+    </script>
 </body>
 </html>
